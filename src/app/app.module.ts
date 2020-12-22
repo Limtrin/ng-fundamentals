@@ -1,24 +1,52 @@
+import { UserModule } from './user/userModule';
+import { Error404Component } from './errors/404.component';
+import { appRoutes } from './routes';
 import { ToastrService } from './common/toastr.service';
-import { EventService } from './events/shared/event.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { EventsListComponent } from './events/events-list.component';
-import { EventThumbnailComponent } from './events/event-thumbnail.component';
 import { NavBarComponent } from './nav/navbar.component';
+import { RouterModule } from '@angular/router';
+
+import {
+  EventListResolver,
+  EventRouteActivator,
+  CreateEventComponent,
+  EventDetailsComponent,
+  EventService,
+  EventsListComponent,
+  EventThumbnailComponent
+} from './events/index'
 
 @NgModule({
   declarations: [
     AppComponent,
     EventsListComponent,
     EventThumbnailComponent,
-    NavBarComponent
+    NavBarComponent,
+    EventDetailsComponent,
+    CreateEventComponent,
+    Error404Component
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [EventService, ToastrService],
+  providers: [
+    EventService,
+    ToastrService,
+    EventRouteActivator,
+    EventListResolver,
+    UserModule,
+    { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function checkDirtyState(component: CreateEventComponent) {
+  if (component.isDirty)
+    return window.confirm('Do you want to cancel?')
+  return true
+}
