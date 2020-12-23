@@ -1,3 +1,5 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './user/auth.service';
 import { UserModule } from './user/userModule';
 import { Error404Component } from './errors/404.component';
 import { appRoutes } from './routes';
@@ -31,7 +33,9 @@ import {
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     EventService,
@@ -39,7 +43,8 @@ import {
     EventRouteActivator,
     EventListResolver,
     UserModule,
-    { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
+    { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
