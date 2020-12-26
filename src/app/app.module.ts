@@ -1,3 +1,4 @@
+import { SessionListComponent } from './events/event-details/session-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './user/auth.service';
 import { UserModule } from './user/userModule';
@@ -18,7 +19,8 @@ import {
   EventDetailsComponent,
   EventService,
   EventsListComponent,
-  EventThumbnailComponent
+  EventThumbnailComponent,
+  CreateSessionComponent
 } from './events/index'
 
 @NgModule({
@@ -29,7 +31,9 @@ import {
     NavBarComponent,
     EventDetailsComponent,
     CreateEventComponent,
-    Error404Component
+    Error404Component,
+    CreateSessionComponent,
+    SessionListComponent
   ],
   imports: [
     BrowserModule,
