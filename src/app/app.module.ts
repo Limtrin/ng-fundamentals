@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav/navbar.component';
 import { RouterModule } from '@angular/router';
 
+import { CollapseWellComponent } from './common/collapsible-well.component'
+
 import {
   EventListResolver,
   EventRouteActivator,
@@ -33,7 +35,8 @@ import {
     CreateEventComponent,
     Error404Component,
     CreateSessionComponent,
-    SessionListComponent
+    SessionListComponent,
+    CollapseWellComponent
   ],
   imports: [
     BrowserModule,
